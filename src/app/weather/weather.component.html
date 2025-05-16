@@ -1,0 +1,101 @@
+<section class="section" *ngIf="weatherDetails" >
+    <div class="container">
+        <div class="first">
+            <mat-slide-toggle (change)="mode($event)"
+                class="example-margin"
+                [checked]="checked"
+                [disabled]="disabled">
+                Dark Mode
+            </mat-slide-toggle>
+
+            <div class="insideSerach">
+                <input type="text" placeholder="serach for your prefreed city...." name="" id="">
+                <img style="position: absolute; left: 26%; height: 3vh;" src="../../assets/icons/search.svg" alt="">
+            </div>
+
+            <div>
+                <button class="location">Current locaton</button>
+            </div>
+
+        </div>
+
+        <div class="second">
+            <div class="secondFirst">
+                <div style="padding: 5%; display: flex; height: 100%; flex-direction: column; align-items: center; justify-content: space-between;">
+                    <h4 style="font-size: 20px; font-weight: 500;">{{weatherDetails.cityName}}</h4>
+                    <p style="font-size: 35px; font-weight: 600;">{{date | date:'h:mm'}}</p>
+                    <p style="font-size: 16px; "> {{ date | date:'EEE'}}</p>
+                </div>
+            </div>
+            <div class="secondSecond" >
+                <div class="secondFirstFirst">
+                    <h1 style="font-size: 35px; font-weight: 600;">{{math.round(weatherDetails.maxTemp)}}<sup>&deg;</sup>C</h1>
+                    <h4>Fells like:{{math.round(weatherDetails.feels_like)}}<sup>&deg;</sup>C </h4>
+                    <div class="sun d-flex align-items-center" >   
+                        <img style="height: 5vh;" src="../../assets/icons/sunrise.png" alt="">
+                        <p> Sunrise : {{weatherDetails.sunRise }}</p>
+                    </div>
+                    <div class="sun d-flex align-items-center">
+                        <img style="height: 5vh;" src="../../assets/icons/sunset.png" alt="">
+                        <p> Sunset : {{weatherDetails.sunRise }}</p>
+                    </div>
+                </div>
+                <div class="secondSecondSecond  d-flex flex-column align-items-center justify-content-center">
+                    <img style="height: 15vh;" src="../../assets/icons/sun.png" alt="">
+                    <p>Sunny</p>
+                </div>
+                <div class="secondThird">
+                    <div class="Details">
+                        <img src="assets/icons/humidity.svg" alt="">
+                        <p class="datails-value">{{weatherDetails.humidity + '%'}}
+                        <p class="datails-key">Humadity</p>
+                    </div>
+                    <div class="Details">
+                        <img src="assets/icons/wind.svg" alt="">
+                        <p class="datails-value">{{(weatherDetails.wind.speed * 3.6).toFixed(1) + 'km/h'}}
+                            <p class="datails-key">Wind</p>
+                    </div>
+                    <div class="Details">
+                        <img src="assets/icons/humidity.svg" alt="">
+                        <p class="datails-value">{{weatherDetails.pressure + '%'}}
+                        <p class="datails-key">Pressure</p>
+                    </div>
+                    <div class="Details">
+                        <img src="assets/icons/humidity.svg" alt="">
+                        <p class="datails-value">{{weatherDetails.humidity + '%'}}
+                        <p class="datails-key">Humadity</p>
+                    </div>
+                </div>
+
+
+
+
+
+            </div>
+
+        </div>
+
+        <div class="third">
+            <div class="thirdFirst">
+                <h1>5 Day Forecast</h1>
+                <div class="forecast d-flex align-items-center " style="gap: 10px;" *ngFor="let data of fiveDyafORCAST">
+                    <img style="height: 5vh;" [src]="data.img" alt="">
+                    <ng-container *ngFor="let details of data.temp">
+                        <p style="font-size: 20px; font-weight: 600;">{{math.round(details.weatherDataDay)}}<sup>&deg;</sup>C<p>
+                        <p>{{details.weatherDataDay | date:'MMM d, y'}}</p>
+
+                    </ng-container>
+                </div>
+            </div>
+            <div class="thirdSecond">
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
