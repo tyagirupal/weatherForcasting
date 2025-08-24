@@ -1,26 +1,14 @@
-// This file can be replaced during build by using the `fileReplacements` array.
-// `ng build` replaces `environment.ts` with `environment.prod.ts`.
-// The list of file replacements can be found in `angular.json`.
-
+// Replaced during build by fileReplacements with environment.prod.ts
 export const environment = {
   production: false,
-  
+
+  // Base domain for ALL OpenWeather calls (forecast + geocoding)
   weatherApiUrl: 'https://api.openweathermap.org/',
-  cityApiUrl: 'https://api.teleport.org/api/',
+  cityApiUrl:   'https://api.openweathermap.org/',
+
+  // OpenWeather icons base (used by your template helper)
   imageUrl: 'https://openweathermap.org/img/wn/',
-  weatherApiKey :'51d29cba08c8a105d0a75df119af7664'
+
+  // <<< PUT YOUR REAL KEY HERE >>>
+  weatherApiKey: '51d29cba08c8a105d0a75df119af7664'
 };
-  // production: false,
-  // weatherApiUrl: 'https://api.openweathermap.org/',
-  // cityApiUrl: 'https://api.teleport.org/api/',
-  // imageUrl: 'https://openweathermap.org/img/wn/',
-
-
-/*
- * For easier debugging in development mode, you can import the following file
- * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
- *
- * This import should be commented out in production mode because it will have a negative impact
- * on performance if an error is thrown.
- */
-// import 'zone.js/plugins/zone-error';  // Included with Angular CLI.
