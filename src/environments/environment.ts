@@ -4,11 +4,17 @@
 
 export const environment = {
   production: false,
+  
   weatherApiUrl: 'https://api.openweathermap.org/',
   cityApiUrl: 'https://api.teleport.org/api/',
   imageUrl: 'https://openweathermap.org/img/wn/',
   weatherApiKey :'51d29cba08c8a105d0a75df119af7664'
 };
+  // production: false,
+  // weatherApiUrl: 'https://api.openweathermap.org/',
+  // cityApiUrl: 'https://api.teleport.org/api/',
+  // imageUrl: 'https://openweathermap.org/img/wn/',
+
 
 /*
  * For easier debugging in development mode, you can import the following file

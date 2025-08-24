@@ -1,128 +1,146 @@
-// .section{
-//     background: url(../../assets/images/bg-weather.png);
-//     background-repeat: no-repeat;
-//     height: 100%;
-//     width: 100%;
-//     opacity: 1;
-// }
-// .placeDetails{
-//     position: absolute;
-//     bottom: 0;
-//     left: 20%;
-//     color: white;
-// }
+/* ================================
+   Weather Component – consolidated styles
+   Light/Dark theme + Material + Bootstrap overrides
+   ================================ */
 
-// .right {
-//     position: absolute;
-//     width: 30%;
-//     // left: 60%;
-//     right: 0;
-//     backdrop-filter: blur(9.5px);
-//     height: 100%;
-//     border-left: 5px solid rgba(255, 255, 255, 0.14)
-// }
-// .insideRight {
-//     padding: 10%;
-//     display: flex;
-//     flex-direction: column;
-//     justify-content: space-between;
-//     height: 100%;
-// }
-// .detail-area {
-//     color: white;
-//     display: flex;
-//     flex-direction: column;
-//     line-height: 55px;
-//     font-size: 20px;
-// }
-// .details {
-//     display: flex;
-//     gap: 25px;
-// }
-// .datails-value{
-//     font-weight: 500;
+/* ---- Theme variables ---- */
+:host {
+  display: block;
 
-// }
+  /* Light theme */
+  --bg: #ffffff;
+  --fg: #111827;    /* primary text */
+  --muted: #6b7280; /* secondary text */
+  --card: #ffffff;  /* card bg */
+  --tile-light: rgba(0, 0, 0, 0.04);
+  --tile-dark: rgba(255, 255, 255, 0.06);
+  --outline: rgba(0, 0, 0, 0.25);
 
-
-.section{
-    // background-color: #444444;
-    height: 100%;
-    width: 100%;
-}
-.container {
-    padding: 5%;
-    // color: white;
-    display: flex;
-    flex-direction: column;
-    gap: 50px;
+  /* Make the whole component paint its own background */
+  background: var(--bg);
+  min-height: 100vh;
 }
 
-.first {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.insideSerach{
-    width: 60%;
+:host.dark {
+  /* Dark theme */
+  --bg: #111827;
+  --fg: #e5e7eb;
+  --muted: #9ca3af;
+  --card: #1f2937;
+  --outline: rgba(255, 255, 255, 0.30);
+
+  background: var(--bg);
 }
 
-.second {
-    display: flex;
-    justify-content: space-between;
-    /* box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px; */
+/* ---- Base coloring ---- */
+.container { color: var(--fg); background: transparent; }
+mat-card { background: var(--card); }
+
+/* Make ALL text inside the component follow the theme */
+:host.dark,
+:host.dark * { color: var(--fg) !important; }
+
+/* Secondary/muted text (Bootstrap + generic) */
+.text-muted, .small, small { color: var(--muted) !important; }
+:host.dark .text-muted, :host.dark .small, :host.dark small { color: var(--muted) !important; }
+
+/* Ensure disabled button text stays readable in dark */
+:host.dark .mat-mdc-unelevated-button.mat-mdc-button-disabled {
+  color: rgba(255,255,255,.6) !important;
 }
 
-.secondFirst {
-        box-shadow: rgb(0 0 0 / 42%) 2.4px 2.4px 3.2px;
-        padding: 2%;
-        width: 30%;
-        border-radius: 15px;
+/* ---- Cards, titles, dividers ---- */
+mat-card-title { font-weight: 600; }
+mat-divider { opacity: .15; }
+
+/* ---- Icons & tiles ---- */
+.weather-icon { height: 96px; width: 96px; image-rendering: -webkit-optimize-contrast; }
+.forecast-icon { height: 64px; width: 64px; }
+.sun-ico { height: 20px; width: 20px; opacity: .9; }
+
+.tile {
+  border-radius: 16px;
+  background: var(--tile-light);
+  min-height: 140px;
+}
+:host.dark .tile { background: var(--tile-dark); }
+
+/* ---- Responsive grids (remove leftover blank space) ---- */
+.hours-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
+  gap: 12px;
+}
+.days-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 12px;
 }
 
-.secondSecond {
-    display: flex;
-    box-shadow: rgb(0 0 0 / 48%) 2.4px 2.4px 3.2px;
-    padding: 2%;
-    width: 65%;
-    border-radius: 15px;
+/* ---- Search field sizing ---- */
+.search mat-form-field { width: 100%; }
+@media (min-width: 768px) {
+  .search mat-form-field { width: 360px; }
 }
 
-.secondThird {
-    display: flex;
-    // flex-wrap: wrap;
-}
-.Details {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    // padding: 2%;
+/* ---- Angular Material form-field (dark mode readability) ---- */
+:host.dark .mat-mdc-form-field .mdc-text-field__input,
+:host.dark .mat-mdc-form-field .mdc-floating-label,
+:host.dark .mat-mdc-form-field .mat-mdc-form-field-hint,
+:host.dark .mat-mdc-card-title,
+:host.dark .mat-mdc-card-subtitle,
+:host.dark .mat-mdc-slide-toggle .mdc-label {
+  color: var(--fg) !important;
 }
 
-.third {
-    display: flex;
+/* Placeholder + hints */
+:host.dark input::placeholder { color: rgba(255,255,255,.75); }
+:host.dark .mat-mdc-form-field-hint { color: var(--muted) !important; }
+
+/* Outlined notched border */
+.mdc-text-field--outlined .mdc-notched-outline__leading,
+.mdc-text-field--outlined .mdc-notched-outline__notch,
+.mdc-text-field--outlined .mdc-notched-outline__trailing {
+  border-color: var(--outline) !important;
 }
-.thirdFirst {
-    box-shadow: rgb(0 0 0 / 42%) 2.4px 2.4px 3.2px;
-    width: 35%;
-    border-radius: 15px;
-    padding: 2%;
+
+/* Focus ring (subtle theme-aware) */
+.mdc-text-field--focused .mdc-notched-outline__leading,
+.mdc-text-field--focused .mdc-notched-outline__notch,
+.mdc-text-field--focused .mdc-notched-outline__trailing {
+  border-color: currentColor !important;
 }
-input{
-    width: 100%;
-    background: transparent;
-    border: none;
-    box-shadow: rgba(0, 0, 0, 0.42) 2.4px 2.4px 3.2px;
-    padding: 2%;
-    border-radius: 15px;
-    font-size: 18px;
-    color: white;
+
+/* Dark mode: soften field focus overlay */
+:host.dark .mat-mdc-form-field-focus-overlay {
+  background-color: rgba(255,255,255,0.06) !important;
 }
-.location{
-    background-color: rgba(102, 190, 102, 0.747);
-    color: white;
-    border-radius: 15px;
-    padding: 1%;
-    border: none;
+
+/* ---- Autocomplete panel (overlay) ----
+   Panel is outside the component; style via ::ng-deep limited to 'city-auto' class.
+*/
+::ng-deep .city-auto.mat-mdc-autocomplete-panel {
+  background: var(--card) !important;
+  color: var(--fg) !important;
+}
+::ng-deep .city-auto .mat-mdc-option .mdc-list-item__primary-text {
+  color: var(--fg) !important;
+}
+::ng-deep .city-auto .mat-mdc-option.mdc-list-item--selected,
+::ng-deep .city-auto .mat-mdc-option.mdc-list-item--activated,
+::ng-deep .city-auto .mat-mdc-option:hover {
+  background: rgba(0,0,0,0.06) !important;
+}
+:host.dark ::ng-deep .city-auto .mat-mdc-option.mdc-list-item--selected,
+:host.dark ::ng-deep .city-auto .mat-mdc-option.mdc-list-item--activated,
+:host.dark ::ng-deep .city-auto .mat-mdc-option:hover {
+  background: rgba(255,255,255,0.08) !important;
+}
+
+/* Ensure overlay is above cards */
+::ng-deep .cdk-overlay-container { z-index: 1000; }
+
+/* ---- Buttons (icon alignment when mixing Bootstrap + Material) ---- */
+button[mat-flat-button] .mat-icon {
+  font-size: 18px; line-height: 18px; height: 18px; width: 18px;
 }
